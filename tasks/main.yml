@@ -1,0 +1,56 @@
+- name: Stop unnecessary services
+  service: name={{ item }} state=stopped enabled=no
+  with_items:
+    - auditd
+    - netfs
+
+- shell: /etc/firewall.bash
+
+- name: Update yum packages
+  yum: name=* state=latest
+
+- yum: name="@Japanese Support" state=present
+- yum: name="@Base" state=present
+
+- name: Intall yum packages
+  yum: name={{ item }} state=present
+  with_items:
+    - autoconf
+    - clamd
+    - compat-libtermcap
+    - ctags
+    - curl
+    - gcc
+    - gdbm-devel
+    - git-core
+    - ipa-pgothic-fonts
+    - jq
+    - libyaml-devel
+    - make
+    - man
+    - mercurial
+    - ncurses-devel
+    - nkf
+    - openssl-devel
+    - perl-ExtUtils-Embed
+    - perl-devel
+    - postfix
+    - python-devel
+    - python-psycopg2
+    - readline-devel
+    - rpm-build
+    - subversion
+    - unzip
+    - wget
+    - zip
+    - zlib-devel
+    - http://archives.fedoraproject.org/pub/archive/fedora/linux/core/6/x86_64/os/Fedora/RPMS/lv-4.51-8.1.x86_64.rpm 
+
+# - shell: freshclam
+#   sudo_user: clam
+# 
+# - name: Start unnecessary services
+#   service: name={{ item }} state=started enabled=yes
+#   with_items:
+#     - clamd
+

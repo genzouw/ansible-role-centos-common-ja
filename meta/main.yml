@@ -1,0 +1,22 @@
+---
+dependencies:
+  - role: genzouw.selinux-disable
+  - role: geerlingguy.firewall
+  - role: geerlingguy.ntp
+  - role: genzouw.repos-for-centos
+  - role: genzouw.locale-lang
+  - role: genzouw.vim7_4
+
+galaxy_info:
+  author: genzouw
+  description: 'Scrit to setup Japanese Environment.'
+  license: "license (BSD, MIT)"
+  min_ansible_version: 1.6
+  platforms:
+  - name: EL
+    versions:
+    - all
+  categories:
+    - networking
+    - system
+    - web
