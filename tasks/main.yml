@@ -4,8 +4,6 @@
     - auditd
     - netfs
 
-- shell: /etc/firewall.bash
-
 - name: Update yum packages
   yum: name=* state=latest
 
