@@ -31,7 +31,6 @@
     - openssl-devel
     - perl-ExtUtils-Embed
     - perl-devel
-    - postfix
     - python-devel
     - python-psycopg2
     - readline-devel
