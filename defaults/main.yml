@@ -2,3 +2,10 @@ firewall_allowed_tcp_ports:
   - "22"
   - "80"
 ntp_timezone: "Asia/Tokyo"
+centos_common_unnecessarry_services: 
+  - auditd
+  - cups
+  - ip6tables
+  - netfs
+  - nfs
+  - nfsclock
