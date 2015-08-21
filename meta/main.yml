@@ -3,6 +3,7 @@ dependencies:
   - role: genzouw.selinux-disable
   - role: geerlingguy.firewall
   - role: geerlingguy.ntp
+    ntp_timezone: Asia/Tokyo
   - role: genzouw.repos-for-centos
   - role: genzouw.locale-lang
   - role: genzouw.vim7_4
