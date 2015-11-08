@@ -23,6 +23,7 @@
     - ipa-pgothic-fonts
     - jq
     - libyaml-devel
+    - lv
     - make
     - man
     - mercurial
@@ -40,7 +41,6 @@
     - wget
     - zip
     - zlib-devel
-    - http://archives.fedoraproject.org/pub/archive/fedora/linux/core/6/x86_64/os/Fedora/RPMS/lv-4.51-8.1.x86_64.rpm 
 
 # - shell: freshclam
 #   sudo_user: clam
