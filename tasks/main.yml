@@ -5,6 +5,7 @@
 
 - name: Update yum packages
   yum: name=* state=latest
+  ignore_errors: yes
 
 - yum: name="@Japanese Support" state=present
 - yum: name="@Base" state=present
@@ -41,6 +42,7 @@
     - wget
     - zip
     - zlib-devel
+  ignore_errors: yes
 
 # - shell: freshclam
 #   sudo_user: clam
