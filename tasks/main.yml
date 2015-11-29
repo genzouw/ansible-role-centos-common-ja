@@ -5,13 +5,12 @@
 
 - name: Update yum packages
   yum: name=* state=latest
-  ignore_errors: yes
 
 - yum: name="@Japanese Support" state=present
 - yum: name="@Base" state=present
 
 - name: Intall yum packages
-  yum: name={{ item }} state=latest
+  yum: name={{ item }} state=present
   with_items:
     - autoconf
     - clamd
@@ -24,7 +23,6 @@
     - ipa-pgothic-fonts
     - jq
     - libyaml-devel
-    - lv
     - make
     - man
     - mercurial
@@ -42,7 +40,16 @@
     - wget
     - zip
     - zlib-devel
-  ignore_errors: yes
+    - http://archives.fedoraproject.org/pub/archive/fedora/linux/core/6/x86_64/os/Fedora/RPMS/lv-4.51-8.1.x86_64.rpm 
+
+  - get_url: url=http://ftp.jaist.ac.jp/pub/OpenBSD/OpenSSH/portable/openssh-{{ openssh_version }}.tar.gz dest=/usr/local/src/openssh-{{ openssh_version }}.tar.gz
+    tags: [ openssh ]
+  - name: Install openssh.
+    shell: sudo tar xf openssh-{{ openssh_version }}.tar.gz; cd openssh-{{ openssh_version }}; sudo ./configure; sudo make; sudo make install
+    args:
+      chdir: /usr/local/src
+      creates: /usr/local/bin/ssh
+    tags: [ openssh ]
 
 # - shell: freshclam
 #   sudo_user: clam
