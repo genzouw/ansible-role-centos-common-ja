@@ -9,5 +9,4 @@ centos_common_unnecessarry_services:
   - netfs
   - nfs
   - nfsclock
-  - smbd
 openssh_version: 7.1p1
