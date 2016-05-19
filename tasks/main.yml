@@ -19,7 +19,7 @@
     - curl
     - gcc
     - gdbm-devel
-    - git-core
+    - git
     - ipa-pgothic-fonts
     - jq
     - libyaml-devel
