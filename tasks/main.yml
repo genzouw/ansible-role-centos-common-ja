@@ -3,9 +3,6 @@
   with_items: centos_common_unnecessarry_services
   ignore_errors: yes
 
-- name: Update yum packages
-  yum: name=* state=latest
-
 - yum: name="@Japanese Support" state=present
 - yum: name="@Base" state=present
 
