@@ -6,7 +6,7 @@ dependencies:
     ntp_timezone: Asia/Tokyo
   - role: genzouw.repos-for-centos
   - role: genzouw.locale-lang
-  - role: genzouw.vim7_4
+  - role: genzouw.vim
 
 galaxy_info:
   author: genzouw
