@@ -8,7 +8,7 @@
 
 - name: Intall yum packages
   yum:
-    name: {{ item }}
+    name: "{{ item }}"
     disable_gpg_check: yes
     state: latest
   with_items:
