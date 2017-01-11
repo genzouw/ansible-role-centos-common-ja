@@ -3,6 +3,16 @@
   with_items: centos_common_unnecessarry_services
   ignore_errors: yes
 
+- lineinfile:
+    dest: /etc/yum/pluginconf.d/fastestmirror.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - regexp: "^[ #]*include_only=.*$"
+      line: "include_only=.jp"
+    - regexp: "^[ #]*prefer=.*$"
+      line: "prefer=ftp.iij.ad.jp"
+
 - yum: name="@Japanese Support" state=present
 - yum: name="@Base" state=present
 
@@ -40,9 +50,8 @@
 - get_url: url=http://ftp.jaist.ac.jp/pub/OpenBSD/OpenSSH/portable/openssh-{{ openssh_version }}.tar.gz dest=/usr/local/src/openssh-{{ openssh_version }}.tar.gz
   tags: [ openssh ]
 - name: Install openssh.
-  shell: sudo tar xf openssh-{{ openssh_version }}.tar.gz; cd openssh-{{ openssh_version }}; sudo ./configure; sudo make; sudo make install
+  shell: tar xf openssh-{{ openssh_version }}.tar.gz; cd openssh-{{ openssh_version }}; ./configure; make -j2; make install
   args:
     chdir: /usr/local/src
     creates: /usr/local/bin/ssh
   tags: [ openssh ]
-
