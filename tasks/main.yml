@@ -2,6 +2,7 @@
   service: name={{ item }} state=stopped enabled=no
   with_items: centos_common_unnecessarry_services
   ignore_errors: yes
+  when: ansible_os_family == 'RedHat'
 
 - lineinfile:
     dest: /etc/yum/pluginconf.d/fastestmirror.conf
@@ -12,46 +13,59 @@
       line: "include_only=.jp"
     - regexp: "^[ #]*prefer=.*$"
       line: "prefer=ftp.iij.ad.jp"
+  when: ansible_os_family == 'RedHat'
 
-- yum: name="@Japanese Support" state=present
-- yum: name="@Base" state=present
+- package: name="@Japanese Support" state=present
+  when: ansible_os_family == 'RedHat'
+- package: name="@Base" state=present
+  when: ansible_os_family == 'RedHat'
 
-- name: Intall yum packages
-  yum:
+- name: Intall packages
+  package:
     name: "{{ item }}"
-    disable_gpg_check: yes
+    # disable_gpg_check: yes
     state: latest
   with_items:
-    - autoconf
-    - ctags
-    - curl
-    - gcc
     - gdbm-devel
-    - git
     - ipa-pgothic-fonts
-    - jq
     - libyaml-devel
-    - make
-    - man
     - mercurial
     - ncurses-devel
-    - nkf
     - openssl-devel
     - perl-ExtUtils-Embed
     - perl-devel
     - python-devel
     - python-psycopg2
     - readline-devel
+    - zlib-devel
+  when: ansible_os_family == 'RedHat'
+
+- name: Intall packages
+  package:
+    name: "{{ item }}"
+    # disable_gpg_check: yes
+    state: latest
+  with_items:
+    - autoconf
+    - ctags
+    - curl
+    - gcc
+    - git
+    - jq
+    - make
+    - man
+    - nkf
     - unzip
     - wget
     - zip
-    - zlib-devel
 
 - get_url: url=http://ftp.jaist.ac.jp/pub/OpenBSD/OpenSSH/portable/openssh-{{ openssh_version }}.tar.gz dest=/usr/local/src/openssh-{{ openssh_version }}.tar.gz
   tags: [ openssh ]
+  when: ansible_os_family == 'RedHat'
 - name: Install openssh.
   shell: tar xf openssh-{{ openssh_version }}.tar.gz; cd openssh-{{ openssh_version }}; ./configure; make -j2; make install
   args:
     chdir: /usr/local/src
     creates: /usr/local/bin/ssh
   tags: [ openssh ]
+  when: ansible_os_family == 'RedHat'
