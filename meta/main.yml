@@ -8,7 +8,7 @@ dependencies:
   - role: genzouw.repos-for-centos
     when: ansible_os_family == 'RedHat'
   - role: genzouw.locale-lang
-  - role: genzouw.vim
+  - role: genzouw.ansible-role-vim
 
 galaxy_info:
   author: genzouw
